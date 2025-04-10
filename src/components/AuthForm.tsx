@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useMessage } from '@/components/MessageContext';
 
 type AuthFormProps = {
   onSuccess: () => void;
@@ -82,6 +84,8 @@ type SocialData = {
   blog?: string;
   threads?: string;
 };
+
+const healthCheck = '';
 
 export default function AuthForm({ onSuccess }: AuthFormProps) {
   const [isSignUp, setIsSignUp] = useState(false);

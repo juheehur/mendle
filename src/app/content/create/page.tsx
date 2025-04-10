@@ -8,6 +8,7 @@ import html2canvas from 'html2canvas';
 import { ChevronLeftIcon, ChevronRightIcon, DownloadIcon, RefreshCwIcon, EditIcon } from 'lucide-react';
 import { useMessage } from '@/components/MessageContext';
 import { supabase } from '@/lib/supabase';
+import { generateContent } from '@/lib/geminiUtils';
 
 export default function CreateContent() {
   const router = useRouter();

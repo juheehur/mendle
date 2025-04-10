@@ -1,12 +1,21 @@
 'use client';
 
-import { useEffect, useState, useRef, ChangeEvent, ReactNode } from 'react';
+import { useEffect, useState, useRef, ChangeEvent, ReactNode, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import NextImage from 'next/image';
 import { enhanceImage, imageFilters } from '@/lib/imageUtils';
 import { generateAdCopy } from '@/lib/geminiUtils';
 import { downloadImage } from '@/lib/downloadUtils';
-import { ImageIcon, Loader2Icon, SunIcon, SparklesIcon, MoveVerticalIcon, ArrowUpCircleIcon, ArrowDownCircleIcon } from 'lucide-react';
+import { 
+  ImageIcon,
+  Loader2Icon,
+  SunIcon,
+  SparklesIcon,
+  MoveVerticalIcon,
+  ArrowUpCircleIcon,
+  ArrowDownCircleIcon,
+  Link
+} from 'lucide-react';
 import Link from 'next/link';
 import { useMessage } from '@/components/MessageContext';
 import { backgroundImages } from '@/lib/backgroundImages';
@@ -65,7 +74,10 @@ export default function CreateAd() {
   const inputRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { showMessage } = useMessage();
-  const randomBackground = backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
+  const randomBackground = useMemo(() => {
+    const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEEAD']
+    return colors[Math.floor(Math.random() * colors.length)]
+  }, [])
   const [user, setUser] = useState<{ id: string; email: string } | null>(null);
   const [showAuthForm, setShowAuthForm] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
@@ -282,23 +294,6 @@ export default function CreateAd() {
       return 'absolute inset-0 flex flex-col items-center justify-center text-white text-center';
     }
     return 'absolute bottom-8 left-8 text-white';
-  };
-
-  // 파일 선택 핸들러
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    // 이미지 파일 체크
-    if (!file.type.startsWith('image/')) {
-      showMessage('이미지 파일만 업로드 가능합니다.', 'error');
-      return;
-    }
-
-    // 미리보기 URL 생성
-    const url = URL.createObjectURL(file);
-    setImagePreview(url);
-    setStep(3); // 형식 선택 단계로 이동
   };
 
   // 밝기 조절
