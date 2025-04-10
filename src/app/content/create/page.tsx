@@ -20,7 +20,6 @@ export default function CreateContent() {
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [user, setUser] = useState<{ id: string; email: string } | null>(null);
 
   const previewRef = useRef<HTMLDivElement>(null);
   const { showMessage } = useMessage();
@@ -38,24 +37,6 @@ export default function CreateContent() {
       }
     }
   }, [router]);
-
-  // 사용자 정보 가져오기
-  useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session?.user) {
-        setUser({
-          id: session.user.id,
-          email: session.user.email || '',
-        });
-      } else {
-        setUser(null);
-      }
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, []);
 
   // 콘텐츠 텍스트 입력 시 제목 생성
   useEffect(() => {
@@ -142,21 +123,6 @@ export default function CreateContent() {
     }
     
     return classes;
-  };
-
-  // Add a function to balance text
-  const balanceText = (text: string): React.ReactNode => {
-    const words = text.split(' ');
-    const mid = Math.ceil(words.length / 2);
-    const firstLine = words.slice(0, mid).join(' ');
-    const secondLine = words.slice(mid).join(' ');
-    return (
-      <>
-        <span>{firstLine}</span>
-        <br />
-        <span>{secondLine}</span>
-      </>
-    );
   };
 
   return (

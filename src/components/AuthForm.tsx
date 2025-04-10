@@ -1,8 +1,6 @@
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useMessage } from '@/components/MessageContext';
 
 type AuthFormProps = {
   onSuccess: () => void;
@@ -84,8 +82,6 @@ type SocialData = {
   blog?: string;
   threads?: string;
 };
-
-const healthCheck = '';
 
 export default function AuthForm({ onSuccess }: AuthFormProps) {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -210,7 +206,7 @@ export default function AuthForm({ onSuccess }: AuthFormProps) {
         });
 
         // Supabase 연결 확인
-        const { data: healthCheck, error: healthError } = await supabase
+        const { error: healthError } = await supabase
           .from('creator_profiles')
           .select('count')
           .limit(1);

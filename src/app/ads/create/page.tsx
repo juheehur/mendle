@@ -60,12 +60,7 @@ export default function CreateAd() {
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const { showMessage } = useMessage();
-  const randomBackground = useMemo(() => {
-    const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEEAD']
-    return colors[Math.floor(Math.random() * colors.length)]
-  }, [])
   const [user, setUser] = useState<{ id: string; email: string } | null>(null);
   const [showAuthForm, setShowAuthForm] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
@@ -319,7 +314,6 @@ export default function CreateAd() {
           logging: false,
           onclone: (clonedDoc: Document) => {
             // 복제된 문서에서만 텍스트 간격 조정
-            const textContainer = clonedDoc.querySelector('[data-text-container]');
             const titleElement = clonedDoc.querySelector('[data-title]');
             const descElement = clonedDoc.querySelector('[data-desc]');
             
@@ -444,20 +438,6 @@ export default function CreateAd() {
     setShowAuthForm(false);
     if (adCopy.mainCopy) {
       saveAdCopy();
-    }
-  };
-
-  // 광고 멘트 수정 버튼 클릭 핸들러
-  const handleEditClick = () => {
-    if (!user) {
-      setShowAuthForm(true);
-      return;
-    }
-    
-    if (!savedAdCopy && adCopy.mainCopy) {
-      saveAdCopy().then(() => setShowEditForm(true));
-    } else {
-      setShowEditForm(true);
     }
   };
 
