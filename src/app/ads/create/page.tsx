@@ -19,16 +19,8 @@ import {
   SparklesIcon,
   MoveVerticalIcon,
   ArrowUpCircleIcon,
-  ArrowDownCircleIcon,
-  Link
+  ArrowDownCircleIcon
 } from 'lucide-react';
-import Link from 'next/link';
-import { useMessage } from '@/components/MessageContext';
-import { backgroundImages } from '@/lib/backgroundImages';
-import AuthForm from '@/components/AuthForm';
-import EditAdCopy from '@/components/EditAdCopy';
-import type { AdCopy as AdCopyType } from '@/lib/types';
-import { supabase } from '@/lib/supabase';
 
 type Message = {
   id: number;
