@@ -11,15 +11,6 @@ import AuthForm from '@/components/AuthForm';
 import EditAdCopy from '@/components/EditAdCopy';
 import type { AdCopy as AdCopyType } from '@/lib/types';
 import { supabase } from '@/lib/supabase';
-import { 
-  ImageIcon,
-  Loader2Icon,
-  SunIcon,
-  SparklesIcon,
-  MoveVerticalIcon,
-  ArrowUpCircleIcon,
-  ArrowDownCircleIcon
-} from 'lucide-react';
 
 type Message = {
   id: number;
