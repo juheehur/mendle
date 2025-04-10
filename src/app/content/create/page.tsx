@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { ContentType, ContentStyle, contentStyles } from '@/lib/contentStyles';
+import { ContentType, contentStyles } from '@/lib/contentStyles';
 import html2canvas from 'html2canvas';
 import { ChevronLeftIcon, ChevronRightIcon, DownloadIcon, RefreshCwIcon, EditIcon } from 'lucide-react';
 import { useMessage } from '@/components/MessageContext';

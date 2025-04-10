@@ -6,6 +6,12 @@ import NextImage from 'next/image';
 import { enhanceImage, imageFilters } from '@/lib/imageUtils';
 import { generateAdCopy } from '@/lib/geminiUtils';
 import { downloadImage } from '@/lib/downloadUtils';
+import Link from 'next/link';
+import { useMessage } from '@/components/MessageContext';
+import AuthForm from '@/components/AuthForm';
+import EditAdCopy from '@/components/EditAdCopy';
+import type { AdCopy as AdCopyType } from '@/lib/types';
+import { supabase } from '@/lib/supabase';
 import { 
   ImageIcon,
   Loader2Icon,
